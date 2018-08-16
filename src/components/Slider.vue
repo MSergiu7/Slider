@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <carousel-3d
+      dir="ltr"
       :space="200"
       :width="640"
       :height="426"
