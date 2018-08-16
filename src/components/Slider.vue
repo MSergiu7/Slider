@@ -1,38 +1,44 @@
 <template>
   <div class="container">
-    <i class="fas fa-angle-left" @click="prev"></i>
-    <app-slide :index="index"></app-slide>
-    <i class="fas fa-angle-right" @click="next"></i>
+    <carousel-3d
+      :space="200"
+      :width="640"
+      :height="426"
+      :perspective="35"
+      :display="7"
+      :border="1"
+      :controls-prev-html="'&#10094;'"
+      :controls-next-html="'&#10095;'"
+      :controls-visible="true"
+      :clickable="false"
+    >
+      <slide v-for="(slide, i) in slides" :index="i" :key="i">
+          <img
+          :key=index
+          :src="'src/assets/slide' + slide + '.jpg'"
+          alt="photo in carousel"
+          >
+      </slide>
+    </carousel-3d>
+    <!-- <img src="../assets/slide1.jgp" alt=""> -->
   </div>
 </template>
 
 <script>
-  import Slide from './Slide.vue'
+
+  import {Carousel3d, Slide} from 'vue-carousel-3d'
+
   export default {
 
     data() {
       return {
-        index: 1
+        index: 1,
+        slides: 7
       }
     },
     components: {
-      appSlide: Slide
-    },
-    methods: {
-      next() {
-        if (this.index == 6) {
-          this.index = 1;
-        } else {
-          this.index ++;
-        }
-      },
-      prev() {
-        if (this.index == 1) {
-          this.index = 6;
-        } else {
-          this.index --;
-        }
-      }
+      Carousel3d,
+      Slide
     }
   }
 </script>
@@ -46,51 +52,21 @@
     position: relative;
   }
 
-  .fas {
-    font-size: 50px;
+  .prev span, .next span {
     color: rgb(47, 141, 210);
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
-  .fa-angle-left {
-    left: 0;
+   .carousel-3d-slide {
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
   }
 
-  .fa-angle-right {
-    right: 0;
+  .carousel-3d-slide img {
+    opacity: 0.3
   }
 
-  .flip-enter-active {
-    animation: flip-in 0.5s linear forwards;
-  }
-
-  .flip-leave-active {
-    animation: flip-out 0.5s linear forwards;
-  }
-
-  @keyframes flip-out {
-    from {
-      opacity: 1;
-      transform: rotateY(0deg);
-    }
-    to {
-      opacity: 0.3;
-      transform: rotateY(45deg);
-    }
-  }
-
-  @keyframes flip-in {
-    from {
-      opacity: 0.3;
-      transform: rotateY(-45deg);
-    }
-    to {
-      opacity: 1;
-      transform: rotateY(0deg);
-    }
+  .carousel-3d-slide.current img {
+    opacity: 1;
   }
 
 </style>
