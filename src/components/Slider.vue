@@ -133,7 +133,7 @@
     }
   }
 
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 540px) {
     .carousel-3d-slider, .carousel-3d-slide {
       /* border: 5px solid red; */
       width: 160px !important;
